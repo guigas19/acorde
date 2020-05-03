@@ -38,13 +38,13 @@ usersRouter.post('/', async (req, res) => {
 
 usersRouter.patch('/avatar', upload.single('avatar'), async (req, res) => {
   const updateAvatar = new UpdateUserAvatarService();
+
   const user = await updateAvatar.execute({
     user_id: req.user.id,
     avatarFilename: req.file.filename,
   });
 
   delete user.password;
-
   return res.json(user);
 });
 
